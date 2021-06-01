@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace NeinteenFlower.Handler
+namespace NeinteenFlower.Factory
 {
-    public class FlowerHandler
+    public class FlowerFactory
     {
     }
 }
