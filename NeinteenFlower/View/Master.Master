@@ -4,7 +4,15 @@
 
 <html>
 <head runat="server">
-    <title></title>
+    <title>NeinteenFlower</title>
+    <style>
+        body {
+            background-color: #E5E5E5;
+        }
+        input {
+            padding: 5px 10px;
+        }
+    </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

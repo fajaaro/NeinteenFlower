@@ -43,7 +43,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -71,29 +83,160 @@
     <Content Include="App_Data\NeinteenFlower_log.ldf">
       <DependentUpon>NeinteenFlower.mdf</DependentUpon>
     </Content>
-    <Content Include="View\Flower\CreateFlower.aspx" />
-    <Content Include="View\Flower\EditFlower.aspx" />
+    <Content Include="Model\NeinteenFlower.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NeinteenFlower.edmx</DependentUpon>
+      <LastGenOutput>NeinteenFlower.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\NeinteenFlower.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NeinteenFlower.edmx</DependentUpon>
+      <LastGenOutput>NeinteenFlower.cs</LastGenOutput>
+    </Content>
+    <Content Include="View\404.aspx" />
+    <Content Include="View\Flower\InsertFlower.aspx" />
+    <Content Include="View\Flower\PreOrder.aspx" />
+    <Content Include="View\Flower\UpdateFlower.aspx" />
+    <Content Include="View\Flower\ManageFlower.aspx" />
+    <Content Include="View\Guest\ForgotPassword.aspx" />
+    <Content Include="View\Guest\Login.aspx" />
+    <Content Include="View\Guest\Register.aspx" />
+    <Content Include="View\Home.aspx" />
+    <Content Include="View\Member\InsertMember.aspx" />
+    <Content Include="View\Member\UpdateMember.aspx" />
+    <Content Include="View\Member\ManageMember.aspx" />
+    <Content Include="View\Member\ViewTransactionHistory.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\TransactionController.cs" />
     <Compile Include="Controller\FlowerController.cs" />
+    <Compile Include="Controller\MemberController.cs" />
+    <Compile Include="DataSet\NeinteenFlowerDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NeinteenFlowerDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Factory\EmployeeFactory.cs" />
     <Compile Include="Factory\FlowerFactory.cs" />
+    <Compile Include="Factory\FlowerTypeFactory.cs" />
+    <Compile Include="Factory\MemberFactory.cs" />
+    <Compile Include="Factory\TransactionDetailFactory.cs" />
+    <Compile Include="Factory\TransactionFactory.cs" />
     <Compile Include="Handler\FlowerHandler.cs" />
+    <Compile Include="Handler\FlowerTypeHandler.cs" />
+    <Compile Include="Handler\MemberHandler.cs" />
+    <Compile Include="Handler\TransactionHandler.cs" />
+    <Compile Include="Model\MsEmployee.cs">
+      <DependentUpon>NeinteenFlower.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MsFlower.cs">
+      <DependentUpon>NeinteenFlower.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MsFlowerModel.cs" />
+    <Compile Include="Model\MsFlowerType.cs">
+      <DependentUpon>NeinteenFlower.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MsMember.cs">
+      <DependentUpon>NeinteenFlower.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NeinteenFlower.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NeinteenFlower.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NeinteenFlower.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NeinteenFlower.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NeinteenFlower.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NeinteenFlower.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TrDetail.cs">
+      <DependentUpon>NeinteenFlower.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TrHeader.cs">
+      <DependentUpon>NeinteenFlower.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NeinteenFlowerCR.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NeinteenFlowerCR.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\EmployeeRepository.cs" />
     <Compile Include="Repository\FlowerRepository.cs" />
-    <Compile Include="View\Flower\CreateFlower.aspx.cs">
-      <DependentUpon>CreateFlower.aspx</DependentUpon>
+    <Compile Include="Repository\FlowerTypeRepository.cs" />
+    <Compile Include="Repository\MemberRepository.cs" />
+    <Compile Include="Repository\TransactionDetailRepository.cs" />
+    <Compile Include="Repository\TransactionRepository.cs" />
+    <Compile Include="Singleton.cs" />
+    <Compile Include="View\404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="View\Flower\CreateFlower.aspx.designer.cs">
-      <DependentUpon>CreateFlower.aspx</DependentUpon>
+    <Compile Include="View\404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
     </Compile>
-    <Compile Include="View\Flower\EditFlower.aspx.cs">
-      <DependentUpon>EditFlower.aspx</DependentUpon>
+    <Compile Include="View\Flower\InsertFlower.aspx.cs">
+      <DependentUpon>InsertFlower.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="View\Flower\EditFlower.aspx.designer.cs">
-      <DependentUpon>EditFlower.aspx</DependentUpon>
+    <Compile Include="View\Flower\InsertFlower.aspx.designer.cs">
+      <DependentUpon>InsertFlower.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Flower\PreOrder.aspx.cs">
+      <DependentUpon>PreOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Flower\PreOrder.aspx.designer.cs">
+      <DependentUpon>PreOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Flower\UpdateFlower.aspx.cs">
+      <DependentUpon>UpdateFlower.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Flower\UpdateFlower.aspx.designer.cs">
+      <DependentUpon>UpdateFlower.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Flower\ManageFlower.aspx.cs">
+      <DependentUpon>ManageFlower.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Flower\ManageFlower.aspx.designer.cs">
+      <DependentUpon>ManageFlower.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Guest\ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Guest\ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Guest\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Guest\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Guest\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Guest\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Master.Master.cs">
       <DependentUpon>Master.Master</DependentUpon>
@@ -102,8 +245,54 @@
     <Compile Include="View\Master.Master.designer.cs">
       <DependentUpon>Master.Master</DependentUpon>
     </Compile>
+    <Compile Include="View\Member\InsertMember.aspx.cs">
+      <DependentUpon>InsertMember.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Member\InsertMember.aspx.designer.cs">
+      <DependentUpon>InsertMember.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Member\UpdateMember.aspx.cs">
+      <DependentUpon>UpdateMember.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Member\UpdateMember.aspx.designer.cs">
+      <DependentUpon>UpdateMember.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Member\ManageMember.aspx.cs">
+      <DependentUpon>ManageMember.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Member\ManageMember.aspx.designer.cs">
+      <DependentUpon>ManageMember.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Member\ViewTransactionHistory.aspx.cs">
+      <DependentUpon>ViewTransactionHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Member\ViewTransactionHistory.aspx.designer.cs">
+      <DependentUpon>ViewTransactionHistory.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="Model\NeinteenFlower.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NeinteenFlower.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model\NeinteenFlower.edmx.diagram">
+      <DependentUpon>NeinteenFlower.edmx</DependentUpon>
+    </Content>
+    <Content Include="DataSet\NeinteenFlowerDS.xsc">
+      <DependentUpon>NeinteenFlowerDS.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSet\NeinteenFlowerDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>NeinteenFlowerDS.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSet\NeinteenFlowerDS.xss">
+      <DependentUpon>NeinteenFlowerDS.xsd</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="View\Master.Master" />
     <None Include="Web.Debug.config">
@@ -113,7 +302,22 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Picture\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NeinteenFlowerCR.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NeinteenFlowerCR.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
